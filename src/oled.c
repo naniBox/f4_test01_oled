@@ -121,28 +121,47 @@ void OLEDStart(OLEDDriver * od, const OLEDConfig * ocfgp, SPIDriver * spip)
     spiSelect(od->spip);
 
     ssd1306_command(od, SSD1306_DISPLAYOFF);                    // 0xAE
+
     ssd1306_command(od, SSD1306_SETDISPLAYCLOCKDIV);            // 0xD5
     ssd1306_command(od, 0x80);                                  // the suggested ratio 0x80
+
     ssd1306_command(od, SSD1306_SETMULTIPLEX);                  // 0xA8
-    ssd1306_command(od, 0x1F);
+    ssd1306_command(od, 0x3F);
+
     ssd1306_command(od, SSD1306_SETDISPLAYOFFSET);              // 0xD3
     ssd1306_command(od, 0x0);                                   // no offset
+
     ssd1306_command(od, SSD1306_SETSTARTLINE | 0x0);            // line #0
+
     ssd1306_command(od, SSD1306_CHARGEPUMP);                    // 0x8D
-    ssd1306_command(od, 0x10);
+    ssd1306_command(od, 0x10);									// disabled
+
+    ssd1306_command(od, SSD1306_SEGREMAP 	 | 0x0);
+
+    /*
+     * 00 - Horizontal ; 01 - Vertical ; 10 - page
+     */
+
     ssd1306_command(od, SSD1306_MEMORYMODE);                    // 0x20
-    ssd1306_command(od, 0x00);                                  // 0x0 act like ks0108
-    ssd1306_command(od, SSD1306_SEGREMAP | 0x1);
+    ssd1306_command(od, 0x00);
+
+
     ssd1306_command(od, SSD1306_COMSCANDEC);
+
     ssd1306_command(od, SSD1306_SETCOMPINS);                    // 0xDA
-    ssd1306_command(od, 0x02);
+    ssd1306_command(od, 0x12);
+
     ssd1306_command(od, SSD1306_SETCONTRAST);                   // 0x81
-    ssd1306_command(od, 0x8F);
+    ssd1306_command(od, 0x9F);
+
     ssd1306_command(od, SSD1306_SETPRECHARGE);                  // 0xd9
     ssd1306_command(od, 0x22);
+
     ssd1306_command(od, SSD1306_SETVCOMDETECT);                 // 0xDB
     ssd1306_command(od, 0x40);
+
     ssd1306_command(od, SSD1306_DISPLAYALLON_RESUME);           // 0xA4
+
     ssd1306_command(od, SSD1306_NORMALDISPLAY);                 // 0xA6
 
     ssd1306_command(od, SSD1306_DISPLAYON);
@@ -152,7 +171,7 @@ void OLEDStart(OLEDDriver * od, const OLEDConfig * ocfgp, SPIDriver * spip)
 	OLED_set_command_lock(od, 0x12);			// Unlock Basic Commands (0x12/0x16)
 	OLED_set_display_on_off(od, 0x00);		// Display Off (0x00/0x01)
 	OLED_set_column_address(od,  0x1C, 0x5B );
-	OLED_set_row_address(od,  0x00, 0x3F );
+	OLED_set_page_address(od,  0x00, 0x3F );
 	OLED_set_display_clock(od, 0x91);		// Set Clock as 80 Frames/Sec
 	OLED_set_multiplex_ratio(od, 0x3F);		// 1/64 Duty (0x0F~0x3F)
 	OLED_set_display_offset(od, 0x00);		// Shift Mapping RAM Counter (0x00~0x3F)
@@ -252,9 +271,10 @@ void OLED_put_frame_buffer(OLEDDriver * od)
     spiSelect(od->spip);
 
     palClearPad(od->cfgp->DC.port, od->cfgp->DC.pad);
-	OLED_set_column_address(od, 0x1C, 0x5B);
-	OLED_set_row_address(od, 0x00, 0x40);
-	OLED_set_write_ram(od);
+	/*
+	OLED_set_column_address(od, 0x00, 0x7f);
+	OLED_set_page_address(od, 0x00, 0x07);
+	*/
 
 	palSetPad(od->cfgp->DC.port, od->cfgp->DC.pad);
 	spiStartSend(od->spip, OLED_BUFSIZE, od->frame_buffer);
@@ -294,17 +314,17 @@ void OLED_exit_partial_display(OLEDDriver * od)
 //-----------------------------------------------------------------------------
 void OLED_set_column_address(OLEDDriver * od, unsigned char a, unsigned char b)
 {
-	OLED_write_command(od, 0x15);			// Set Column Address
-	OLED_write_data(od, a);				//   Default => 0x00
-	OLED_write_data(od, b);				//   Default => 0x77
+	OLED_write_command(od, SSD1306_COLUMNADDR);			// Set Column Address
+	OLED_write_data(od, a);
+	OLED_write_data(od, b);
 }
 
 //-----------------------------------------------------------------------------
-void OLED_set_row_address(OLEDDriver * od, unsigned char a, unsigned char b)
+void OLED_set_page_address(OLEDDriver * od, unsigned char a, unsigned char b)
 {
-	OLED_write_command(od, 0x75);			// Set Row Address
-	OLED_write_data(od, a);				//   Default => 0x00
-	OLED_write_data(od, b);				//   Default => 0x7F
+	OLED_write_command(od, SSD1306_PAGEADDR);			// Set Row Address
+	OLED_write_data(od, a);
+	OLED_write_data(od, b);
 }
 
 //-----------------------------------------------------------------------------
@@ -499,7 +519,7 @@ void OLED_fill_ram(OLEDDriver * od, unsigned char Data)
 	//Set_Column_Address(0x00,0x77);
 	//Set_Row_Address(0x00,0x7F);
 	OLED_set_column_address(od, 0x00, 0x77);
-	OLED_set_row_address(od, 0x00, 0x40);
+	OLED_set_page_address(od, 0x00, 0x40);
 
 	OLED_set_write_ram(od);
 
@@ -519,7 +539,7 @@ void OLED_fill_block(OLEDDriver * od, unsigned char Data, unsigned char a, unsig
 	unsigned char i, j;
 
 	OLED_set_column_address(od, OLED_PIXEL_SHIFT + a, OLED_PIXEL_SHIFT + b);
-	OLED_set_row_address(od, c, d);
+	OLED_set_page_address(od, c, d);
 	OLED_set_write_ram(od);
 
 	for (i = 0; i < (d - c + 1); i++)

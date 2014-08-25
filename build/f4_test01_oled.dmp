@@ -7,10 +7,10 @@ start address 0x08000a41
 
 Program Header:
     LOAD off    0x00008000 vaddr 0x08000000 paddr 0x08000000 align 2**15
-         filesz 0x00005d1c memsz 0x00005d20 flags rwx
-    LOAD off    0x00010800 vaddr 0x20000800 paddr 0x08005d20 align 2**15
+         filesz 0x00005b1c memsz 0x00005b20 flags rwx
+    LOAD off    0x00010800 vaddr 0x20000800 paddr 0x08005b20 align 2**15
          filesz 0x0000000c memsz 0x0000000c flags rw-
-    LOAD off    0x00010810 vaddr 0x20000810 paddr 0x08005d2c align 2**15
+    LOAD off    0x00010810 vaddr 0x20000810 paddr 0x08005b2c align 2**15
          filesz 0x00000000 memsz 0x00000e44 flags rw-
     LOAD off    0x00018000 vaddr 0x20000000 paddr 0x20000000 align 2**15
          filesz 0x00000000 memsz 0x00000800 flags rw-
@@ -20,40 +20,40 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 startup       00000188  08000000  08000000  00008000  2**4
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00005b8c  08000190  08000190  00008190  2**4
+  1 .text         0000598c  08000190  08000190  00008190  2**4
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .textalign    00000004  08005d1c  08005d1c  0000dd1c  2**0
+  2 .textalign    00000004  08005b1c  08005b1c  0000db1c  2**0
                   ALLOC
   3 .stacks       00000800  20000000  20000000  00018000  2**0
                   ALLOC
-  4 .data         0000000c  20000800  08005d20  00010800  2**2
+  4 .data         0000000c  20000800  08005b20  00010800  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  5 .bss          00000e44  20000810  08005d2c  00010810  2**3
+  5 .bss          00000e44  20000810  08005b2c  00010810  2**3
                   ALLOC
-  6 .debug_info   000101ba  00000000  00000000  0001080c  2**0
+  6 .debug_info   000101ac  00000000  00000000  0001080c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00002e43  00000000  00000000  000209c6  2**0
+  7 .debug_abbrev 00002e43  00000000  00000000  000209b8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_aranges 00000ae0  00000000  00000000  00023809  2**0
+  8 .debug_aranges 00000ae0  00000000  00000000  000237fb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_ranges 00000900  00000000  00000000  000242e9  2**0
+  9 .debug_ranges 00000900  00000000  00000000  000242db  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_line   0000532c  00000000  00000000  00024be9  2**0
+ 10 .debug_line   00005321  00000000  00000000  00024bdb  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    00002b5f  00000000  00000000  00029f15  2**0
+ 11 .debug_str    00002b60  00000000  00000000  00029efc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .comment      00000070  00000000  00000000  0002ca74  2**0
+ 12 .comment      00000070  00000000  00000000  0002ca5c  2**0
                   CONTENTS, READONLY
- 13 .ARM.attributes 00000039  00000000  00000000  0002cae4  2**0
+ 13 .ARM.attributes 00000039  00000000  00000000  0002cacc  2**0
                   CONTENTS, READONLY
- 14 .debug_frame  00001c84  00000000  00000000  0002cb20  2**2
+ 14 .debug_frame  00001c84  00000000  00000000  0002cb08  2**2
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_loc    00002675  00000000  00000000  0002e7a4  2**0
+ 15 .debug_loc    00002675  00000000  00000000  0002e78c  2**0
                   CONTENTS, READONLY, DEBUGGING
 SYMBOL TABLE:
 08000000 l    d  startup	00000000 startup
 08000190 l    d  .text	00000000 .text
-08005d1c l    d  .textalign	00000000 .textalign
+08005b1c l    d  .textalign	00000000 .textalign
 20000000 l    d  .stacks	00000000 .stacks
 20000800 l    d  .data	00000000 .data
 20000810 l    d  .bss	00000000 .bss
@@ -105,7 +105,7 @@ SYMBOL TABLE:
 080025b0 l     F .text	0000001e gett
 080025d0 l     F .text	00000026 writet
 08002600 l     F .text	00000026 readt
-08005700 l     O .text	00000020 vmt
+08005500 l     O .text	00000020 vmt
 00000000 l    df *ABS*	00000000 spi.c
 00000000 l    df *ABS*	00000000 stm32_dma.c
 20000e20 l     O .bss	00000004 dma_streams_mask
@@ -121,11 +121,11 @@ SYMBOL TABLE:
 08003810 l     F .text	00000100 spi_lld_serve_rx_interrupt
 08003910 l     F .text	0000001a spi_lld_serve_tx_interrupt
 00000000 l    df *ABS*	00000000 serial_lld.c
-080057e0 l     O .text	0000000c default_config
+080055e0 l     O .text	0000000c default_config
 08003bf0 l     F .text	000000a2 usart_init
 08003ca0 l     F .text	0000008c set_error
 08003d30 l     F .text	0000017e serve_interrupt
-08003eb0 l     F .text	00000024 notify1
+08003eb0 l     F .text	00000024 notify2
 08003ee0 l     F .text	00000024 notify3
 00000000 l    df *ABS*	00000000 board.c
 00000000 l    df *ABS*	00000000 chprintf.c
@@ -138,14 +138,14 @@ SYMBOL TABLE:
 20000800 l     O .data	0000000c serial1_default_cfg
 20001248 l     O .bss	00000004 count.7966
 00000000 l    df *ABS*	00000000 oled.c
-080058f0 l     O .text	00000004 LOGO_SIZE
-08005900 l     O .text	00000400 LOGO
-08005d00 l     O .text	0000001c oled_default_cfg
-08004930 l     F .text	00000010 oled_finish_xfer
+080056f0 l     O .text	00000004 LOGO_SIZE
+08005700 l     O .text	00000400 LOGO
+08005b00 l     O .text	0000001c oled_default_cfg
+08004910 l     F .text	00000010 oled_finish_xfer
 00000000 l    df *ABS*	00000000 memcpy.c
 00000000 l    df *ABS*	00000000 memset.c
 00000000 l    df *ABS*	00000000 chregistry.c
-080057f0 g     O .text	000000fc pal_default_config
+080055f0 g     O .text	000000fc pal_default_config
 08000b70  w    F .text	00000002 Vector58
 08000b70  w    F .text	00000002 VectorE8
 08000b70  w    F .text	00000002 Vector9C
@@ -171,7 +171,7 @@ SYMBOL TABLE:
 08001650 g     F .text	0000008e chSchGoSleepS
 08000b70  w    F .text	00000002 Vector110
 20001654 g       *ABS*	00000000 __heap_base__
-08005d20 g       *ABS*	00000000 _etext
+08005b20 g       *ABS*	00000000 _etext
 08002c50 g     F .text	0000005a Vector120
 08001af0 g     F .text	00000078 chThdCreateI
 08001070 g     F .text	0000002c dbg_check_enable
@@ -184,10 +184,11 @@ SYMBOL TABLE:
 08001b70 g     F .text	00000072 chThdCreateStatic
 08000b70  w    F .text	00000002 Vector94
 08000b70  w    F .text	00000002 VectorA8
-08004e00 g     F .text	00000142 memcpy
+08004c00 g     F .text	00000142 memcpy
 08000b70  w    F .text	00000002 VectorB4
 08000434 g     F .text	00000022 __floatsidf
 20000ea4 g     O .bss	00000004 RTCD1
+20000edc g     O .bss	000000d8 SD2
 080015d0 g     F .text	00000076 chSchReadyI
 08000188 g       startup	00000000 __fini_array_end
 08000b80  w    F .text	00000004 port_halt
@@ -227,7 +228,6 @@ SYMBOL TABLE:
 080024c0 g     F .text	00000008 rtcInit
 08000b70  w    F .text	00000002 Vector148
 08000414 g     F .text	0000001e __floatunsidf
-08004d20 g     F .text	0000003a OLED_write_data
 080028e0 g     F .text	0000006a spiStartSend
 08003bb0 g     F .text	00000034 spi_lld_polled_exchange
 200009bc g     O .bss	00000408 dbg_trace_buffer
@@ -246,7 +246,7 @@ SYMBOL TABLE:
 08003f50 g     F .text	0000005c sd_lld_init
 08000b70  w    F .text	00000002 Vector54
 08000b70  w    F .text	00000002 Vector98
-08000b70  w    F .text	00000002 VectorD8
+08003f10 g     F .text	0000001c VectorD8
 08000b70  w    F .text	00000002 Vector138
 0800019c g     F .text	00000276 __aeabi_dadd
 08000b70  w    F .text	00000002 Vector24
@@ -258,7 +258,7 @@ SYMBOL TABLE:
 08000b70  w    F .text	00000002 Vector178
 08001bf0 g     F .text	0000003e chThdSleep
 08001e90 g     F .text	00000050 chIQInit
-08005720 g     O .text	000000c0 _stm32_dma_streams
+08005520 g     O .text	000000c0 _stm32_dma_streams
 08002b90 g     F .text	0000005e Vector84
 08000b90 g     F .text	0000002c SysTickVector
 080027a0 g     F .text	0000002e spiObjectInit
@@ -291,25 +291,23 @@ SYMBOL TABLE:
 08000434 g     F .text	00000022 __aeabi_i2d
 08001290 g     F .text	0000002c chDbgCheckClassS
 08000b70  w    F .text	00000002 VectorF0
-08004940 g     F .text	0000001c ssd1306_command
+08004920 g     F .text	0000001c ssd1306_command
 08002d70 g     F .text	0000005e Vector12C
 08000b70  w    F .text	00000002 Vector13C
 08000754 g     F .text	000001d0 __divdf3
 08000b70  w    F .text	00000002 Vector100
 08001200 g     F .text	00000054 dbg_check_leave_isr
 08000500 g     F .text	00000254 __muldf3
-08005d20 g       *ABS*	00000000 _textdata
+08005b20 g       *ABS*	00000000 _textdata
 08000b70  w    F .text	00000002 VectorE0
 00000000 g       *ABS*	00000000 _text
 08000b70  w    F .text	00000002 VectorF4
 08000b70  w    F .text	00000002 MemManageVector
 08000188 g       startup	00000000 __fini_array_start
-08004cc0 g     F .text	0000001e OLED_clear_frame_buffer
-08004d60 g     F .text	00000038 OLED_set_column_address
-08004de0 g     F .text	00000014 OLED_set_write_ram
-08004960 g     F .text	000001f8 OLEDStart
-08004f50 g     F .text	0000012c memset
-08004770 g     F .text	000001b4 main
+08004ba0 g     F .text	0000001e OLED_clear_frame_buffer
+08004940 g     F .text	000001f8 OLEDStart
+08004d50 g     F .text	0000012c memset
+08004770 g     F .text	00000192 main
 08002950 g     F .text	0000005a Vector6C
 20000dd8 g     O .bss	0000001c rlist
 08000b70  w    F .text	00000002 VectorA0
@@ -325,7 +323,7 @@ SYMBOL TABLE:
 08000eb0 g     F .text	0000001a _idle_thread
 08002290 g     F .text	000000e0 chOQWriteTimeout
 08000b70  w    F .text	00000002 VectorB0
-080056e0 g     O .text	00000016 ch_debug
+080054e0 g     O .text	00000016 ch_debug
 080041f0 g     F .text	00000512 chprintf
 08000b70  w    F .text	00000002 Vector90
 08001d70 g     F .text	00000070 chEvtSignalI
@@ -342,7 +340,7 @@ SYMBOL TABLE:
 20000400 g       .stacks	00000000 __process_stack_base__
 08000b70  w    F .text	00000002 Vector16C
 080029b0 g     F .text	0000005e Vector70
-08003f10 g     F .text	0000001c VectorD4
+08000b70  w    F .text	00000002 VectorD4
 08000e50 g     F .text	00000060 nvicSetSystemHandlerPriority
 08003b30 g     F .text	0000007e spi_lld_send
 20000810 g     O .bss	00000158 _idle_thread_wa
@@ -364,13 +362,12 @@ SYMBOL TABLE:
 2001c000 g       *ABS*	00000000 __ram_end__
 2000080c g       .data	00000000 _edata
 20001654 g       *ABS*	00000000 _end
-08004b60 g     F .text	000000dc OLED_put_pixel
 080014a0 g     F .text	00000072 chVTResetI
 08000b70 g     F .text	00000002 _unhandled_exception
 08000b70  w    F .text	00000002 Vector170
 08002640 g     F .text	00000068 sdObjectInit
 08000b70  w    F .text	00000002 Vector88
-08004ce0 g     F .text	0000003a OLED_write_command
+08004bc0 g     F .text	0000003a OLED_write_command
 20000400 g       .stacks	00000000 __main_thread_stack_base__
 08000930 g     F .text	0000004e __aeabi_d2iz
 08000b70  w    F .text	00000002 Vector104
@@ -378,10 +375,8 @@ SYMBOL TABLE:
 08000b70  w    F .text	00000002 Vector10C
 080012e0 g     F .text	00000094 dbg_trace
 08000188 g       startup	00000000 __init_array_start
-08004c40 g     F .text	0000007c OLED_put_frame_buffer
-08004da0 g     F .text	00000038 OLED_set_row_address
+08004b40 g     F .text	0000005a OLED_put_frame_buffer
 080027d0 g     F .text	0000006c spiStart
-20000edc g     O .bss	000000d8 SD1
 08000b70  w    F .text	00000002 Vector14C
 08001a00 g     F .text	000000be _thread_init
 08000b70  w    F .text	00000002 Vector50

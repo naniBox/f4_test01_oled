@@ -927,11 +927,21 @@ Discarded input sections
  .bss           0x00000000        0x0 build/obj/oled.o
  .data.OLED_font
                 0x00000000      0x4fc build/obj/oled.o
+ .text.OLED_put_pixel
+                0x00000000       0xe0 build/obj/oled.o
  .text.OLED_draw_char
                 0x00000000      0x200 build/obj/oled.o
  .text.OLED_draw_string
                 0x00000000       0x50 build/obj/oled.o
+ .text.OLED_write_data
+                0x00000000       0x40 build/obj/oled.o
  .text.OLED_exit_partial_display
+                0x00000000       0x20 build/obj/oled.o
+ .text.OLED_set_column_address
+                0x00000000       0x40 build/obj/oled.o
+ .text.OLED_set_page_address
+                0x00000000       0x40 build/obj/oled.o
+ .text.OLED_set_write_ram
                 0x00000000       0x20 build/obj/oled.o
  .text.OLED_set_read_ram
                 0x00000000       0x20 build/obj/oled.o
@@ -1180,7 +1190,7 @@ destructors     0x08000188        0x0
  *(SORT(.fini_array.*))
                 0x08000188                PROVIDE (__fini_array_end, .)
 
-.text           0x08000190     0x5b8c
+.text           0x08000190     0x598c
  *(.text.startup.*)
  *(.text)
  .text          0x08000190      0x370 c:/chibistudio/tools/gnu tools arm embedded/4.7 2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/armv7e-m\libgcc.a(_arm_addsubdf3.o)
@@ -1252,7 +1262,6 @@ destructors     0x08000188        0x0
                 0x08000b70                VectorCC
                 0x08000b70                Vector54
                 0x08000b70                Vector98
-                0x08000b70                VectorD8
                 0x08000b70                Vector138
                 0x08000b70                Vector24
                 0x08000b70                Vector178
@@ -1281,6 +1290,7 @@ destructors     0x08000188        0x0
                 0x08000b70                Vector17C
                 0x08000b70                Vector48
                 0x08000b70                Vector16C
+                0x08000b70                VectorD4
                 0x08000b70                Vector4C
                 0x08000b70                Vector144
                 0x08000b70                Vector15C
@@ -1624,11 +1634,11 @@ destructors     0x08000188        0x0
                 0x08003ca0       0x90 build/obj/serial_lld.o
  .text.serve_interrupt
                 0x08003d30      0x180 build/obj/serial_lld.o
- .text.notify1  0x08003eb0       0x30 build/obj/serial_lld.o
+ .text.notify2  0x08003eb0       0x30 build/obj/serial_lld.o
  .text.notify3  0x08003ee0       0x30 build/obj/serial_lld.o
- .text.VectorD4
+ .text.VectorD8
                 0x08003f10       0x20 build/obj/serial_lld.o
-                0x08003f10                VectorD4
+                0x08003f10                VectorD8
  .text.VectorDC
                 0x08003f30       0x20 build/obj/serial_lld.o
                 0x08003f30                VectorDC
@@ -1653,120 +1663,104 @@ destructors     0x08000188        0x0
                 0x080041f0                chprintf
  .text.thBlinker
                 0x08004710       0x60 build/obj/main.o
- .text.main     0x08004770      0x1c0 build/obj/main.o
+ .text.main     0x08004770      0x1a0 build/obj/main.o
                 0x08004770                main
  .text.oled_finish_xfer
-                0x08004930       0x10 build/obj/oled.o
+                0x08004910       0x10 build/obj/oled.o
  .text.ssd1306_command
-                0x08004940       0x20 build/obj/oled.o
-                0x08004940                ssd1306_command
+                0x08004920       0x20 build/obj/oled.o
+                0x08004920                ssd1306_command
  .text.OLEDStart
-                0x08004960      0x200 build/obj/oled.o
-                0x08004960                OLEDStart
- .text.OLED_put_pixel
-                0x08004b60       0xe0 build/obj/oled.o
-                0x08004b60                OLED_put_pixel
+                0x08004940      0x200 build/obj/oled.o
+                0x08004940                OLEDStart
  .text.OLED_put_frame_buffer
-                0x08004c40       0x80 build/obj/oled.o
-                0x08004c40                OLED_put_frame_buffer
+                0x08004b40       0x60 build/obj/oled.o
+                0x08004b40                OLED_put_frame_buffer
  .text.OLED_clear_frame_buffer
-                0x08004cc0       0x20 build/obj/oled.o
-                0x08004cc0                OLED_clear_frame_buffer
+                0x08004ba0       0x20 build/obj/oled.o
+                0x08004ba0                OLED_clear_frame_buffer
  .text.OLED_write_command
-                0x08004ce0       0x40 build/obj/oled.o
-                0x08004ce0                OLED_write_command
- .text.OLED_write_data
-                0x08004d20       0x40 build/obj/oled.o
-                0x08004d20                OLED_write_data
- .text.OLED_set_column_address
-                0x08004d60       0x40 build/obj/oled.o
-                0x08004d60                OLED_set_column_address
- .text.OLED_set_row_address
-                0x08004da0       0x40 build/obj/oled.o
-                0x08004da0                OLED_set_row_address
- .text.OLED_set_write_ram
-                0x08004de0       0x20 build/obj/oled.o
-                0x08004de0                OLED_set_write_ram
- .text.memcpy   0x08004e00      0x144 c:/chibistudio/tools/gnu tools arm embedded/4.7 2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-memcpy.o)
-                0x08004e00                memcpy
- *fill*         0x08004f44        0xc 00
- .text.memset   0x08004f50      0x12c c:/chibistudio/tools/gnu tools arm embedded/4.7 2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-memset.o)
-                0x08004f50                memset
+                0x08004bc0       0x40 build/obj/oled.o
+                0x08004bc0                OLED_write_command
+ .text.memcpy   0x08004c00      0x144 c:/chibistudio/tools/gnu tools arm embedded/4.7 2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-memcpy.o)
+                0x08004c00                memcpy
+ *fill*         0x08004d44        0xc 00
+ .text.memset   0x08004d50      0x12c c:/chibistudio/tools/gnu tools arm embedded/4.7 2013q1/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/lib/armv7e-m\libc.a(lib_a-memset.o)
+                0x08004d50                memset
  *(.rodata)
- *fill*         0x0800507c        0x4 00
- .rodata        0x08005080        0x8 build/obj/chsys.o
- *fill*         0x08005088        0x8 00
- .rodata        0x08005090       0x58 build/obj/chdebug.o
- *fill*         0x080050e8        0x8 00
- .rodata        0x080050f0       0x34 build/obj/chvt.o
- *fill*         0x08005124        0xc 00
- .rodata        0x08005130       0x24 build/obj/chschd.o
- *fill*         0x08005154        0xc 00
- .rodata        0x08005160       0x94 build/obj/chthreads.o
- *fill*         0x080051f4        0xc 00
- .rodata        0x08005200       0xac build/obj/chmtx.o
- *fill*         0x080052ac        0x4 00
- .rodata        0x080052b0       0x90 build/obj/chevents.o
- .rodata        0x08005340       0x2c build/obj/chqueues.o
- *fill*         0x0800536c        0x4 00
- .rodata        0x08005370       0x60 build/obj/serial.o
- .rodata        0x080053d0      0x238 build/obj/spi.o
- *fill*         0x08005608        0x8 00
- .rodata        0x08005610       0x48 build/obj/stm32_dma.o
- *fill*         0x08005658        0x8 00
- .rodata        0x08005660       0x28 build/obj/spi_lld.o
- *fill*         0x08005688        0x8 00
- .rodata        0x08005690        0x8 build/obj/chprintf.o
- *fill*         0x08005698        0x8 00
- .rodata        0x080056a0       0x34 build/obj/main.o
+ *fill*         0x08004e7c        0x4 00
+ .rodata        0x08004e80        0x8 build/obj/chsys.o
+ *fill*         0x08004e88        0x8 00
+ .rodata        0x08004e90       0x58 build/obj/chdebug.o
+ *fill*         0x08004ee8        0x8 00
+ .rodata        0x08004ef0       0x34 build/obj/chvt.o
+ *fill*         0x08004f24        0xc 00
+ .rodata        0x08004f30       0x24 build/obj/chschd.o
+ *fill*         0x08004f54        0xc 00
+ .rodata        0x08004f60       0x94 build/obj/chthreads.o
+ *fill*         0x08004ff4        0xc 00
+ .rodata        0x08005000       0xac build/obj/chmtx.o
+ *fill*         0x080050ac        0x4 00
+ .rodata        0x080050b0       0x90 build/obj/chevents.o
+ .rodata        0x08005140       0x2c build/obj/chqueues.o
+ *fill*         0x0800516c        0x4 00
+ .rodata        0x08005170       0x60 build/obj/serial.o
+ .rodata        0x080051d0      0x238 build/obj/spi.o
+ *fill*         0x08005408        0x8 00
+ .rodata        0x08005410       0x48 build/obj/stm32_dma.o
+ *fill*         0x08005458        0x8 00
+ .rodata        0x08005460       0x28 build/obj/spi_lld.o
+ *fill*         0x08005488        0x8 00
+ .rodata        0x08005490        0x8 build/obj/chprintf.o
+ *fill*         0x08005498        0x8 00
+ .rodata        0x080054a0       0x40 build/obj/main.o
  *(.rodata.*)
- *fill*         0x080056d4        0xc 00
  .rodata.ch_debug
-                0x080056e0       0x18 build/obj/chregistry.o
-                0x080056e0                ch_debug
- *fill*         0x080056f8        0x8 00
- .rodata.vmt    0x08005700       0x20 build/obj/serial.o
+                0x080054e0       0x18 build/obj/chregistry.o
+                0x080054e0                ch_debug
+ *fill*         0x080054f8        0x8 00
+ .rodata.vmt    0x08005500       0x20 build/obj/serial.o
  .rodata._stm32_dma_streams
-                0x08005720       0xc0 build/obj/stm32_dma.o
-                0x08005720                _stm32_dma_streams
+                0x08005520       0xc0 build/obj/stm32_dma.o
+                0x08005520                _stm32_dma_streams
  .rodata.default_config
-                0x080057e0        0xc build/obj/serial_lld.o
- *fill*         0x080057ec        0x4 00
+                0x080055e0        0xc build/obj/serial_lld.o
+ *fill*         0x080055ec        0x4 00
  .rodata.pal_default_config
-                0x080057f0       0xfc build/obj/board.o
-                0x080057f0                pal_default_config
- *fill*         0x080058ec        0x4 00
+                0x080055f0       0xfc build/obj/board.o
+                0x080055f0                pal_default_config
+ *fill*         0x080056ec        0x4 00
  .rodata.LOGO_SIZE
-                0x080058f0        0x4 build/obj/oled.o
- *fill*         0x080058f4        0xc 00
- .rodata.LOGO   0x08005900      0x400 build/obj/oled.o
+                0x080056f0        0x4 build/obj/oled.o
+ *fill*         0x080056f4        0xc 00
+ .rodata.LOGO   0x08005700      0x400 build/obj/oled.o
  .rodata.oled_default_cfg
-                0x08005d00       0x1c build/obj/oled.o
+                0x08005b00       0x1c build/obj/oled.o
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.gcc*)
 
-.vfp11_veneer   0x08005d1c        0x0
+.vfp11_veneer   0x08005b1c        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x08005d1c        0x0
+.v4_bx          0x08005b1c        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x08005d1c        0x0
+.iplt           0x08005b1c        0x0
  .iplt          0x00000000        0x0 build/obj/crt0.o
 
-.rel.dyn        0x08005d1c        0x0
+.rel.dyn        0x08005b1c        0x0
  .rel.iplt      0x00000000        0x0 build/obj/crt0.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM.exidx      0x08005d1c        0x0
-                0x08005d1c                PROVIDE (__exidx_start, .)
+.ARM.exidx      0x08005b1c        0x0
+                0x08005b1c                PROVIDE (__exidx_start, .)
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x08005d1c                PROVIDE (__exidx_end, .)
+                0x08005b1c                PROVIDE (__exidx_end, .)
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
@@ -1774,12 +1768,12 @@ destructors     0x08000188        0x0
 .eh_frame
  *(.eh_frame)
 
-.textalign      0x08005d1c        0x4
-                0x08005d20                . = ALIGN (0x8)
- *fill*         0x08005d1c        0x4 00
-                0x08005d20                . = ALIGN (0x4)
-                0x08005d20                _etext = .
-                0x08005d20                _textdata = _etext
+.textalign      0x08005b1c        0x4
+                0x08005b20                . = ALIGN (0x8)
+ *fill*         0x08005b1c        0x4 00
+                0x08005b20                . = ALIGN (0x4)
+                0x08005b20                _etext = .
+                0x08005b20                _textdata = _etext
 
 .stacks         0x20000000      0x800
                 0x20000000                . = ALIGN (0x8)
@@ -1796,7 +1790,7 @@ destructors     0x08000188        0x0
                 0x20000800                __process_stack_end__ = .
                 0x20000800                __main_thread_stack_end__ = .
 
-.data           0x20000800        0xc load address 0x08005d20
+.data           0x20000800        0xc load address 0x08005b20
                 0x20000800                . = ALIGN (0x4)
                 0x20000800                PROVIDE (_data, .)
  *(.data)
@@ -1809,10 +1803,10 @@ destructors     0x08000188        0x0
                 0x2000080c                . = ALIGN (0x4)
                 0x2000080c                PROVIDE (_edata, .)
 
-.igot.plt       0x2000080c        0x0 load address 0x08005d2c
+.igot.plt       0x2000080c        0x0 load address 0x08005b2c
  .igot.plt      0x00000000        0x0 build/obj/crt0.o
 
-.bss            0x20000810      0xe44 load address 0x08005d2c
+.bss            0x20000810      0xe44 load address 0x08005b2c
                 0x20000810                . = ALIGN (0x4)
                 0x20000810                PROVIDE (_bss_start, .)
  *(.bss)
@@ -1854,8 +1848,8 @@ destructors     0x08000188        0x0
                 0x20000ea8                SPID1
  .bss.dummytx   0x20000ed8        0x2 build/obj/spi_lld.o
  .bss.dummyrx   0x20000eda        0x2 build/obj/spi_lld.o
- .bss.SD1       0x20000edc       0xd8 build/obj/serial_lld.o
-                0x20000edc                SD1
+ .bss.SD2       0x20000edc       0xd8 build/obj/serial_lld.o
+                0x20000edc                SD2
  .bss.SD3       0x20000fb4       0xd8 build/obj/serial_lld.o
                 0x20000fb4                SD3
  *fill*         0x2000108c        0x4 00
@@ -1875,7 +1869,7 @@ destructors     0x08000188        0x0
                 0x2001c000                __heap_end__ = __ram_end__
 OUTPUT(build/f4_test01_oled.elf elf32-littlearm)
 
-.debug_info     0x00000000    0x101ba
+.debug_info     0x00000000    0x101ac
  .debug_info    0x00000000      0x2a3 build/obj/crt0.o
  .debug_info    0x000002a3      0x1f0 build/obj/vectors.o
  .debug_info    0x00000493       0x9a build/obj/chcore.o
@@ -1904,8 +1898,8 @@ OUTPUT(build/f4_test01_oled.elf elf32-littlearm)
  .debug_info    0x0000c16c     0x1176 build/obj/serial_lld.o
  .debug_info    0x0000d2e2      0x1fc build/obj/board.o
  .debug_info    0x0000d4de      0x41e build/obj/chprintf.o
- .debug_info    0x0000d8fc     0x149c build/obj/main.o
- .debug_info    0x0000ed98     0x1422 build/obj/oled.o
+ .debug_info    0x0000d8fc     0x1486 build/obj/main.o
+ .debug_info    0x0000ed82     0x142a build/obj/oled.o
 
 .debug_abbrev   0x00000000     0x2e43
  .debug_abbrev  0x00000000       0xaf build/obj/crt0.o
@@ -2033,7 +2027,7 @@ OUTPUT(build/f4_test01_oled.elf elf32-littlearm)
  .debug_ranges  0x000007a8       0x18 build/obj/main.o
  .debug_ranges  0x000007c0      0x140 build/obj/oled.o
 
-.debug_line     0x00000000     0x532c
+.debug_line     0x00000000     0x5321
  .debug_line    0x00000000      0x169 build/obj/crt0.o
  .debug_line    0x00000169       0xf3 build/obj/vectors.o
  .debug_line    0x0000025c       0x60 build/obj/chcore.o
@@ -2059,13 +2053,13 @@ OUTPUT(build/f4_test01_oled.elf elf32-littlearm)
  .debug_line    0x000037d9      0x1c8 build/obj/pal_lld.o
  .debug_line    0x000039a1      0x2c4 build/obj/rtc_lld.o
  .debug_line    0x00003c65      0x444 build/obj/spi_lld.o
- .debug_line    0x000040a9      0x3cf build/obj/serial_lld.o
- .debug_line    0x00004478      0x156 build/obj/board.o
- .debug_line    0x000045ce      0x2dc build/obj/chprintf.o
- .debug_line    0x000048aa      0x3c9 build/obj/main.o
- .debug_line    0x00004c73      0x6b9 build/obj/oled.o
+ .debug_line    0x000040a9      0x3cd build/obj/serial_lld.o
+ .debug_line    0x00004476      0x156 build/obj/board.o
+ .debug_line    0x000045cc      0x2dc build/obj/chprintf.o
+ .debug_line    0x000048a8      0x3c3 build/obj/main.o
+ .debug_line    0x00004c6b      0x6b6 build/obj/oled.o
 
-.debug_str      0x00000000     0x2b5f
+.debug_str      0x00000000     0x2b60
  .debug_str     0x00000000      0x201 build/obj/crt0.o
                                 0x23b (size before relaxing)
  .debug_str     0x00000201      0x14d build/obj/vectors.o
@@ -2124,8 +2118,8 @@ OUTPUT(build/f4_test01_oled.elf elf32-littlearm)
                                 0x23a (size before relaxing)
  .debug_str     0x00002539      0x2a8 build/obj/main.o
                                 0x953 (size before relaxing)
- .debug_str     0x000027e1      0x37e build/obj/oled.o
-                                0x871 (size before relaxing)
+ .debug_str     0x000027e1      0x37f build/obj/oled.o
+                                0x872 (size before relaxing)
 
 .comment        0x00000000       0x70
  .comment       0x00000000       0x70 build/obj/crt0.o
@@ -2322,7 +2316,6 @@ OLED_grayscale                                    build/obj/oled.o
 OLED_put_frame_buffer                             build/obj/oled.o
                                                   build/obj/main.o
 OLED_put_pixel                                    build/obj/oled.o
-                                                  build/obj/main.o
 OLED_set_column_address                           build/obj/oled.o
 OLED_set_command_lock                             build/obj/oled.o
 OLED_set_contrast_current                         build/obj/oled.o
@@ -2337,13 +2330,13 @@ OLED_set_gpio                                     build/obj/oled.o
 OLED_set_linear_gray_scale_table                  build/obj/oled.o
 OLED_set_master_current                           build/obj/oled.o
 OLED_set_multiplex_ratio                          build/obj/oled.o
+OLED_set_page_address                             build/obj/oled.o
 OLED_set_partial_display                          build/obj/oled.o
 OLED_set_phase_length                             build/obj/oled.o
 OLED_set_precharge_period                         build/obj/oled.o
 OLED_set_precharge_voltage                        build/obj/oled.o
 OLED_set_read_ram                                 build/obj/oled.o
 OLED_set_remap_format                             build/obj/oled.o
-OLED_set_row_address                              build/obj/oled.o
 OLED_set_start_line                               build/obj/oled.o
 OLED_set_vcomh                                    build/obj/oled.o
 OLED_set_write_ram                                build/obj/oled.o
@@ -2353,7 +2346,7 @@ PendSVVector                                      build/obj/vectors.o
 RTCD1                                             build/obj/rtc_lld.o
 ResetHandler                                      build/obj/crt0.o
                                                   build/obj/vectors.o
-SD1                                               build/obj/serial_lld.o
+SD2                                               build/obj/serial_lld.o
                                                   build/obj/main.o
 SD3                                               build/obj/serial_lld.o
 SPID1                                             build/obj/spi_lld.o
@@ -2454,9 +2447,9 @@ VectorC4                                          build/obj/vectors.o
 VectorC8                                          build/obj/vectors.o
 VectorCC                                          build/obj/vectors.o
 VectorD0                                          build/obj/vectors.o
-VectorD4                                          build/obj/serial_lld.o
+VectorD4                                          build/obj/vectors.o
+VectorD8                                          build/obj/serial_lld.o
                                                   build/obj/vectors.o
-VectorD8                                          build/obj/vectors.o
 VectorDC                                          build/obj/serial_lld.o
                                                   build/obj/vectors.o
 VectorE0                                          build/obj/vectors.o

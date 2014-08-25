@@ -76,7 +76,7 @@ void OLED_write_command(OLEDDriver * od, unsigned char d);
 void OLED_OLED_write_data(OLEDDriver * od, unsigned char d);
 void OLED_exit_partial_display(OLEDDriver * od);
 void OLED_set_column_address(OLEDDriver * od, unsigned char a, unsigned char b);
-void OLED_set_row_address(OLEDDriver * od, unsigned char a, unsigned char b);
+void OLED_set_page_address(OLEDDriver * od, unsigned char a, unsigned char b);
 void OLED_set_write_ram(OLEDDriver * od);
 void OLED_set_read_ram(OLEDDriver * od);
 void OLED_set_remap_format(OLEDDriver * od, unsigned char d);
